@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Registro y edición de pacientes</h4>
+                      <p class="card-category">Ingrese rut del paciente</p>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                          <div class="row">
+
+                              <div class="col-md-4 input-group">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Rut" required>
+                                  </mat-form-field>
+
+                                  <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                      <i class="material-icons">search</i>
+                                      <div class="ripple-container"></div>
+                                  </button>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Nombre" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Apellido paterno" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Apellido materno" required>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Telefono 1" type="text" required>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Telefono 2" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Calle" type="text" required>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="N°" type="number" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Depto" type="text">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                      <mat-select>
+                                          <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select>
+                                        <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-select>
+                                        <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <label>Preexistencias</label>
+                                <mat-form-field class="example-full-width">
+                                   <textarea matInput ></textarea>
+                                 </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
