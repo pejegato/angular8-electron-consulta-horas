@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import {Pacientes} from '../dominio/Pacientes';
+import {Doctor} from '../dominio/Doctor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultaHorasService {
 
-  paciente: Pacientes = new Pacientes();
+  paciente: Pacientes;
+  doctores: Doctor[];
 
   constructor() { }
 
   public getPacientes(rut: number) {
+
+    this.paciente  = new Pacientes();
+
     this.paciente.nombres = 'Rodrigo Andrés';
     this.paciente.apellidoPaterno = 'Ramírez';
     this.paciente.apellidoMaterno = 'Retamal';
@@ -38,7 +43,27 @@ export class ConsultaHorasService {
 
   public getDoctoresPorEspecialidad(codEspecialidad: number) {
 
+    const doctor1: Doctor = new Doctor();
+    doctor1.nombres = 'Juan';
+    doctor1.apellidoPaterno = 'Perez';
+    doctor1.apellidoPaterno = 'Prado';
+    this.doctores.push(doctor1);
+
+    const doctor2: Doctor = new Doctor();
+    doctor2.nombres = 'Guillermo';
+    doctor2.apellidoPaterno = 'Gatica';
+    doctor2.apellidoPaterno = 'Gausse';
+    this.doctores.push(doctor2);
+
+    const doctor3: Doctor = new Doctor();
+    doctor3.nombres = '';
+    doctor3.apellidoPaterno = '';
+    doctor3.apellidoPaterno = '';
+    this.doctores.push(doctor3);
 
   }
+
+
+
 
 }
