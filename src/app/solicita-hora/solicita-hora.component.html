@@ -4,105 +4,93 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
-            <h4 class="card-title">Registro y edición de pacientes</h4>
-            <p class="card-category">Ingrese rut del paciente</p>
+            <h4 class="card-title">Solicitud de horas medicas</h4>
+            <p class="card-category">Ingrese datos para solicitud</p>
           </div>
           <div class="card-body">
-            <form>
-              <div class="row">
 
+              <div class="row">
                 <div class="col-md-4 input-group">
+
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Rut" required>
+                    <input matInput [(ngModel)]="rut"  placeholder="Rut" required>
                   </mat-form-field>
 
-                  <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon" (click)="getPaciente(rut)">
                     <i class="material-icons">search</i>
                     <div class="ripple-container"></div>
                   </button>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
+
+              <div class="row" *ngIf="paciente">
+                <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nombre" required>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Apellido paterno" required>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Apellido materno" required>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Telefono 1" type="text" required>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Telefono 2" type="text">
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Calle" type="text" required>
+                    <input matInput placeholder="Nombre" [(ngModel)]="paciente.nombres" disabled>
                   </mat-form-field>
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="N°" type="number" required>
+                    <input matInput placeholder="Apellido paterno" [(ngModel)]="paciente.apellidoPaterno" disabled>
                   </mat-form-field>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Depto" type="text">
+                    <input matInput placeholder="Apellido materno" [(ngModel)]="paciente.apellidoMaterno" disabled>
                   </mat-form-field>
                 </div>
+                <div class="col-md-2">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Telefono 1" type="text" [(ngModel)]="paciente.telefono1" disabled>
+                  </mat-form-field>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <mat-select>
-                      <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+              <div class="col-md-2">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Telefono 2" type="text" [(ngModel)]="paciente.telefono2" disabled>
+                </mat-form-field>
+              </div>
+            </div>
 
-                </div>
-                <div class="col-md-4">
+              <div class="row" *ngIf="listaEspecialidades">
+                <div class="col-md-3">
                   <mat-form-field class="example-full-width">
-                    <mat-select>
-                      <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
+                    <mat-label>Seleccione especialidad</mat-label>
+                    <mat-select [(ngModel)]="especialidadSeleccionada">
+                      <mat-option  name="fieldName" ngDefaultControl [value]="listaEspecialidades" (onSelectionChange)="getDoctores(especialidad )" *ngFor="let especialidad of listaEspecialidades">{{especialidad.descripcion}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="col-md-4">
+
+                <div class="col-md-3" *ngIf="listaDoctores">
                   <mat-form-field class="example-full-width">
-                    <mat-select>
-                      <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
+                    <mat-label>Seleccione especialista</mat-label>
+                    <mat-select [(ngModel)]="doctorSeleccionado">
+                      <mat-option  name="fieldName" ngDefaultControl  [value]="doctor" *ngFor="let doctor of listaDoctores">{{doctor.nombres +' '+ doctor.apellidoPaterno +' '+ doctor.apellidoMaterno}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-3" *ngIf="doctorSeleccionado">
+                  <mat-form-field>
+                    <input matInput (ngModelChange)="getHorasSolicitadas(doctorSeleccionado, fechaSeleccionada)" [(ngModel)]="fechaSeleccionada" [matDatepicker]="picker" placeholder="Seleccione Fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-3" *ngIf="fechaSeleccionada">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Seleccione hora</mat-label>
+                    <mat-select [(ngModel)]="horaSeleccionada">
+                      <mat-option  name="fieldName" ngDefaultControl  [value]="citacion" *ngFor="let citacion of datasource">{{citacion.hora}} - {{citacion.disponible ? 'disponible' : 'no disponible'}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label>Preexistencias</label>
-                  <mat-form-field class="example-full-width">
-                    <textarea matInput ></textarea>
-                  </mat-form-field>
-                </div>
-              </div>
-              <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+
+              <button mat-raised-button (click)="createHorasSolicitadas(doctorSeleccionado, fechaSeleccionada, horaSeleccionada)" class="btn btn-danger pull-right">Seleccionar Hora</button>
+
               <div class="clearfix"></div>
-            </form>
           </div>
         </div>
       </div>

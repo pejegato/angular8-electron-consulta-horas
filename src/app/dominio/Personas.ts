@@ -1,5 +1,6 @@
 export class Personas {
 
+    private _rut: string;
     private _nombres: string;
     private _apellidoPaterno: string;
     private _apellidoMaterno: string;
@@ -12,6 +13,14 @@ export class Personas {
     private _sexo: string;
     private _fechaNacimiento: Date;
 
+
+    get rut(): string {
+        return this._rut;
+    }
+
+    set rut(value: string) {
+        this._rut = value;
+    }
 
     get nombres(): string {
         return this._nombres;
