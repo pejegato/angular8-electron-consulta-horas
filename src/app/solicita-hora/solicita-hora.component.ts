@@ -113,11 +113,23 @@ export class SolicitaHoraComponent implements OnInit {
   ngOnInit() {
   }
   public getPaciente(rut: number) {
-    this.ch.getPacientes(rut).subscribe((data: {}) => {
-      console.log(data);
-      this.paciente = data[0];
-      this.getEspecialidades();
-    })
+      if(rut){
+          this.ch.getPacientes(rut).subscribe((data: {}) => {
+              console.log(data);
+              if(data[0]){
+                  this.paciente = data[0];
+                  this.getEspecialidades();
+              }else{
+                  alert("No existe paciente");
+                  this.limpiarCampos();
+              }
+          })
+      }else{
+              alert("Rut obligatorio");
+      }
+
+
+
   }
 
   public getEspecialidades() {
@@ -139,29 +151,46 @@ export class SolicitaHoraComponent implements OnInit {
       console.log(data);
       //verifica si la hora existe
       for (let hora of this.datasource) {
-        if (_.find(data, {'fecha': fechaSeleccionada, 'hora': hora.hora, 'especialidad': doctor.especialidad, 'doctor': doctor.rut})) {
-          hora.disponible = false;
+          let existe = _.find(data, {'fecha': fechaSeleccionada.setHours(0, 0, 0, 0).toString(), 'hora': hora.hora, 'doctor': doctor.rut});
+          console.log(existe.toString());
+        if (existe) {
+              hora.disponible = false;
         }
       }
     })
   }
 
   public createHorasSolicitadas(doctor: Doctor, fechaSeleccionada: Date, horaSeleccionada: HorasSolicitadas ) {
-    let horaGuardar: HorasSolicitadas = new HorasSolicitadas();
-    horaGuardar.fecha = fechaSeleccionada.setHours(0,0,0,0);
-    horaGuardar.doctor = doctor.rut;
-    horaGuardar.especialidad = doctor.especialidad;
-    horaGuardar.hora = horaSeleccionada.hora;
-    console.log("hora ", horaGuardar);
 
-    this.ch.createHorasSolicitadas(horaGuardar).subscribe((data: {}) => {
+    if(this.horaSeleccionada.disponible){
+        let horaGuardar: HorasSolicitadas = new HorasSolicitadas();
+        horaGuardar.fecha = fechaSeleccionada.setHours(0, 0, 0, 0).toString();
+        horaGuardar.doctor = doctor.rut;
+        horaGuardar.especialidad = doctor.especialidad;
+        horaGuardar.hora = horaSeleccionada.hora;
 
-    })
+        this.ch.createHorasSolicitadas(horaGuardar).subscribe((data: {}) => {
+            this.limpiarCampos();
+            alert("Hora agendada exitosamente");
+        })
+
+    }else{
+       alert("Hora no disponible");
+    }
+
   }
 
 
-  public solicitarHoura() {
-
+  public limpiarCampos() {
+      this.rut = null;
+      this.paciente = null;
+      this.listaEspecialidades = null;
+      this.listaDoctores = null;
+      this.fechaSeleccionada = null;
+      this.doctorSeleccionado       = null;
+      this.horaSeleccionada         = null;
+      this.fechaSeleccionada        = null;
+      this.especialidadSeleccionada = null;
 
   }
 }

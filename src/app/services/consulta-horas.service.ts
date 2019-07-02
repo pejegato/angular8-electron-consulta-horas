@@ -38,7 +38,7 @@ export class ConsultaHorasService {
   }
 
   public getHorasSolicitadas(doctor: Doctor) {
-    return this.httpClient.get<HorasSolicitadas>('http://localhost:3000/horas/?especialidad=' + doctor.rut + doctor.especialidad);
+    return this.httpClient.get<HorasSolicitadas>('http://localhost:3000/horas/?doctor=' + doctor.rut);
   }
 
   public createHorasSolicitadas (hora: HorasSolicitadas): Observable<HorasSolicitadas> {

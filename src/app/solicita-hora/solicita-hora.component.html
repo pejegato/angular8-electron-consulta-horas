@@ -72,9 +72,9 @@
 
                 <div class="col-md-3" *ngIf="doctorSeleccionado">
                   <mat-form-field>
-                    <input matInput (ngModelChange)="getHorasSolicitadas(doctorSeleccionado, fechaSeleccionada)" [(ngModel)]="fechaSeleccionada" [matDatepicker]="picker" placeholder="Seleccione Fecha">
+                    <input matInput  [matDatepicker]="picker" placeholder="Seleccione Fecha"  [(ngModel)]="fechaSeleccionada"  (ngModelChange)="getHorasSolicitadas(doctorSeleccionado, fechaSeleccionada)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker #picker ></mat-datepicker>
                   </mat-form-field>
                 </div>
 
@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <button mat-raised-button (click)="createHorasSolicitadas(doctorSeleccionado, fechaSeleccionada, horaSeleccionada)" class="btn btn-danger pull-right">Seleccionar Hora</button>
+              <button *ngIf="horaSeleccionada" mat-raised-button (click)="createHorasSolicitadas(doctorSeleccionado, fechaSeleccionada, horaSeleccionada)" class="btn btn-danger pull-right">Seleccionar Hora</button>
 
               <div class="clearfix"></div>
           </div>

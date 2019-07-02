@@ -1,7 +1,7 @@
 export class HorasSolicitadas {
 
     private _hora: string;
-    private _fecha: number;
+    private _fecha: string;
     private _doctor: string;
     private _especialidad: string;
 
@@ -14,11 +14,11 @@ export class HorasSolicitadas {
         this._hora = value;
     }
 
-    get fecha(): number {
+    get fecha(): string {
         return this._fecha;
     }
 
-    set fecha(value: number) {
+    set fecha(value: string) {
         this._fecha = value;
     }
 
