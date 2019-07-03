@@ -54,6 +54,16 @@ export class ConsultaHorasService {
     return this.httpClient.post<HorasSolicitadas>('http://localhost:3000/horas/', JSON.stringify(jsonHour), this.httpOptions);
   }
 
+  public createPaciente (paciente: Pacientes): Observable<Pacientes> {
+
+    return this.httpClient.post<Pacientes>('http://localhost:3000/pacientes/', JSON.stringify(paciente), this.httpOptions);
+  }
+
+  public updatePaciente (paciente: Pacientes): Observable<Pacientes> {
+
+    return this.httpClient.put<Pacientes>('http://localhost:3000/pacientes/' + paciente.id, JSON.stringify(paciente), this.httpOptions);
+  }
+
 
 
 }

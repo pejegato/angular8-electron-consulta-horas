@@ -1,111 +1,107 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title">Registro y edición de pacientes</h4>
-                      <p class="card-category">Ingrese rut del paciente</p>
-                  </div>
-                  <div class="card-body">
-                      <form *ngIf="paciente">
-                          <div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Registro y edición de pacientes</h4>
+                        <p class="card-category">Ingrese rut del paciente</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 input-group">
+                                <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="rut" [ngModelOptions]="{standalone: true}" disabled="{{disable}}" matInput placeholder="Rut" required>
+                                </mat-form-field>
 
-                              <div class="col-md-4 input-group">
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Rut" required>
-                                  </mat-form-field>
+                                <button (click)="getPaciente(rut)" class="btn btn-white btn-round btn-just-icon" mat-raised-button type="submit">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="paciente">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.nombres" matInput placeholder="Nombre" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.apellidoPaterno" matInput placeholder="Apellido paterno" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.apellidoMaterno" matInput placeholder="Apellido materno" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.telefono1" matInput placeholder="Telefono 1" required type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.telefono2" matInput placeholder="Telefono 2" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.direccion" matInput placeholder="Calle" required type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.numero" matInput placeholder="N°" required type="number">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="paciente.complemento" matInput placeholder="Depto" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="paciente.region">
+                                            <mat-option *ngFor="let region of selectRegiones" [value]="region">{{region}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
 
-                                  <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                      <i class="material-icons">search</i>
-                                      <div class="ripple-container"></div>
-                                  </button>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Nombre" required>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Apellido paterno" required>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Apellido materno" required>
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Telefono 1" type="text" required>
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Telefono 2" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Calle" type="text" required>
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-2">
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="N°" type="number" required>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Depto" type="text">
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                      <mat-select>
-                                          <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
-                                      </mat-select>
-                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="paciente.ciudad">
+                                            <mat-option *ngFor="let ciudad of selectCiudades" [value]="ciudad">{{ciudad}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="paciente.comuna">
+                                            <mat-option *ngFor="let comuna of selectComunas" [value]="comuna">{{comuna}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
 
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <mat-select>
-                                        <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <mat-select>
-                                        <mat-option [value]="region" *ngFor="let region of selectRegiones">{{region}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <label>Preexistencias</label>
-                                <mat-form-field class="example-full-width">
-                                   <textarea matInput ></textarea>
-                                 </mat-form-field>
-                              </div>
-                          </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
-                          <div class="clearfix"></div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                            <button (click)="guardarPaciente()" *ngIf="paciente && !isEdicion" class="btn btn-danger pull-right" mat-raised-button type="submit">Guardar</button>
+                            <button (click)="guardarPaciente()" *ngIf="paciente && isEdicion" class="btn btn-danger pull-right" mat-raised-button type="submit">Editar</button>
+                            <button (click)="limpiar()" *ngIf="paciente" class="btn btn-danger pull-right" mat-raised-button type="submit">Cancelar</button>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
