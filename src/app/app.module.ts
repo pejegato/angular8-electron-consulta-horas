@@ -15,6 +15,7 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ElectronService} from 'ngx-electron';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
       MatDatepickerModule,
       MatNativeDateModule,
       HttpClient,
+      ElectronService
   ],
 
   bootstrap: [AppComponent]
