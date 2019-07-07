@@ -5,6 +5,7 @@ import {Pacientes} from '../dominio/Pacientes';
 import {Doctor} from '../dominio/Doctor';
 import {HorasSolicitadas} from '../dominio/HorasSolicitadas';
 import {_} from 'underscore';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 // @ts-ignore
 @Component({
@@ -98,7 +99,7 @@ export class SolicitaHoraComponent implements OnInit {
     ];
 
 
-    constructor(public ch: ConsultaHorasService) {
+    constructor(public ch: ConsultaHorasService, private _snackBar: MatSnackBar) {
     }
 
     ngOnInit() {
@@ -113,12 +114,12 @@ export class SolicitaHoraComponent implements OnInit {
                     this.paciente = data[0];
                     this.getEspecialidades();
                 } else {
-                    alert('No existe paciente');
+                    this.openSnackBar('No existe paciente', null);
                     this.limpiarCampos();
                 }
             })
         } else {
-            alert('Rut obligatorio');
+            this.openSnackBar('Rut obligatorio', null);
         }
     }
 
@@ -184,17 +185,19 @@ export class SolicitaHoraComponent implements OnInit {
 
             this.ch.createHorasSolicitadas(horaGuardar).subscribe((data: {}) => {
                 this.limpiarCampos();
-                alert('Hora agendada exitosamente');
+                this.openSnackBar('Hora agendada exitosamente', null);
+                //alert('Hora agendada exitosamente');
             })
 
         } else {
-            alert('Hora no disponible');
+            this.openSnackBar('Hora no disponible', null);
+            //alert('Hora no disponible');
         }
     }
 
 
     public limpiarCampos() {
-        this.disable = true;
+        this.disable = false;
         this.rut = null;
         this.paciente = null;
         this.listaEspecialidades = null;
@@ -204,5 +207,11 @@ export class SolicitaHoraComponent implements OnInit {
         this.fechaSeleccionada = null;
         this.especialidadSeleccionada = null;
 
+    }
+
+    openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+            duration: 2000,
+        });
     }
 }

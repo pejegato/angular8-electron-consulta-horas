@@ -13,7 +13,7 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import {MatDatepickerModule, MatNativeDateModule, MatSnackBar, MatSnackBarModule} from '@angular/material';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ElectronService} from 'ngx-electron';
 
@@ -30,6 +30,7 @@ import {ElectronService} from 'ngx-electron';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+      MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     },
@@ -44,7 +45,8 @@ import {ElectronService} from 'ngx-electron';
       MatDatepickerModule,
       MatNativeDateModule,
       HttpClient,
-      ElectronService
+      ElectronService,
+      MatSnackBar
   ],
 
   bootstrap: [AppComponent]

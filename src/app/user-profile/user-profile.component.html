@@ -1,4 +1,5 @@
 <div class="main-content">
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -8,10 +9,13 @@
                         <p class="card-category">Ingrese rut del paciente</p>
                     </div>
                     <div class="card-body">
+                        <script type="text/javascript" charset="utf-8">
+                            document.getElementsByTagName('input')[0].focus()
+                        </script>
                         <div class="row">
                             <div class="col-md-4 input-group">
                                 <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="rut" [ngModelOptions]="{standalone: true}" disabled="{{disable}}" matInput placeholder="Rut" required>
+                                    <input [(ngModel)]="rut" [ngModelOptions]="{standalone: true}" disabled="{{disable}}" matInput placeholder="Rut" >
                                 </mat-form-field>
 
                                 <button (click)="getPaciente(rut)" class="btn btn-white btn-round btn-just-icon" mat-raised-button type="submit">
@@ -24,24 +28,24 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.nombres" matInput placeholder="Nombre" required>
+                                        <input [(ngModel)]="paciente.nombres" matInput placeholder="Nombre">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.apellidoPaterno" matInput placeholder="Apellido paterno" required>
+                                        <input [(ngModel)]="paciente.apellidoPaterno" matInput placeholder="Apellido paterno">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.apellidoMaterno" matInput placeholder="Apellido materno" required>
+                                        <input [(ngModel)]="paciente.apellidoMaterno" matInput placeholder="Apellido materno">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.telefono1" matInput placeholder="Telefono 1" required type="number">
+                                        <input [(ngModel)]="paciente.telefono1" matInput placeholder="Telefono 1" type="number">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
@@ -53,12 +57,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.direccion" matInput placeholder="Calle" required type="text">
+                                        <input [(ngModel)]="paciente.direccion" matInput placeholder="Calle" type="text">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
                                     <mat-form-field class="example-full-width">
-                                        <input [(ngModel)]="paciente.numero" matInput placeholder="N°" required type="number">
+                                        <input [(ngModel)]="paciente.numero" matInput placeholder="N°" type="number">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">

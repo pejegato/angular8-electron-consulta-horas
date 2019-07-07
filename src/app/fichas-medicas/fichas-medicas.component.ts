@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConsultaHorasService} from '../services/consulta-horas.service';
 import {Pacientes} from '../dominio/Pacientes';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,7 +10,7 @@ import {Pacientes} from '../dominio/Pacientes';
 })
 export class FichasMedicasComponent implements OnInit {
 
-  constructor(public ch: ConsultaHorasService) {
+  constructor(public ch: ConsultaHorasService, private _snackBar: MatSnackBar) {
   }
 
   rut: any = '';
@@ -27,18 +28,21 @@ export class FichasMedicasComponent implements OnInit {
           this.disable = true;
           this.paciente = data[0];
         }else{
-          alert("No existe paciente");
+          this.openSnackBar('No existe paciente', null);
+          //alert("No existe paciente");
           this.limpiar();
         }
       })
     } else{
-      alert("Rut obligatorio");
+      //alert("Rut obligatorio");
+      this.openSnackBar('Rut obligatorio', null);
     }
   }
 
   actualizar(){
     this.ch.updatePaciente(this.paciente).subscribe((data: {}) => {
-      alert("Paciente editado exitosamente");
+      //alert("Paciente editado exitosamente");
+      this.openSnackBar('Paciente editado exitosamente', null);
       this.limpiar();
     })
   }
@@ -47,6 +51,12 @@ export class FichasMedicasComponent implements OnInit {
     this.disable = false;
     this.paciente = null;
     this.rut = '';
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }
